@@ -5,6 +5,9 @@ const connect = require('./Database/database.js');
 const categoriesController = require('./Categories/CategoriesController.js');
 const articleController = require('./Articles/articlesController');
 
+const Article = require('./Articles/Article');
+const Categorie = require('./Categories/Categorie');
+
 connect
     .authenticate()
     .then(() => {

@@ -6,10 +6,8 @@ const Categorie = connect.define('categories', {
         type: Sequelize.STRING,
         allowNull: false
     }, slug: {
-        type: {
-            type: Sequelize.STRING,
+        type:Sequelize.STRING,
             allowNull: false
-        }
     }
 })
 
