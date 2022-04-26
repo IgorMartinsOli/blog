@@ -11,4 +11,6 @@ const Categorie = connect.define('categories', {
     }
 })
 
+//Categorie.sync({force: true}); criar as tabelas (rodar apenas uma vez)
+
 module.exports = Categorie;
