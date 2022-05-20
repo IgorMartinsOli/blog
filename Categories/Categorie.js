@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const connect = require('../Database/database');
-
+    
 const Categorie = connect.define('categories', {
     title: {
         type: Sequelize.STRING,
