@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const categorie = require('./Categorie')
+const categorie = require('./Categorie');
 const slugify = require('slugify');
 const { render } = require('express/lib/response');
 const { Router } = require('express');
@@ -17,7 +17,7 @@ router.post("/categories/save", (req, res) => {
             slug: slugify(title)
         }).then(() => {
             res.redirect("/")
-        })
+        });
     }else{
         res.redirect('/admin/categories/new');
     }
