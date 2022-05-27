@@ -6,8 +6,8 @@ router.get('/artiles', (req, res) => {
 });
 
 
-router.get('admin/artiles/new', (req, res) => {
-    res.send('Rota em Controller para admin cadastrar novo article');
+router.get('/admin/articles/new', (req, res) => {
+    res.render('admin/articles/new');
 });
 
 module.exports = router;
