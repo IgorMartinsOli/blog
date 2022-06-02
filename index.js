@@ -57,6 +57,17 @@ app.get('/:slug', (req, res) => {
     })
 });
 
+app.get('categories/:slug', (req, res) => {
+    let slug = req.params.slug;
+    Categories.findOne({
+        where:{
+            slug: slug
+        }
+    }).then(categories => {
+        
+    })
+})
+
 app.listen(8080, () => {
     console.log('Server listening on port 8080');
 });
