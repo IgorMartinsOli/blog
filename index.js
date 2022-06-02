@@ -25,12 +25,37 @@ connect
         console.log('Erro: ' + err.message);
     });
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
-
 app.use('/', categoriesController);
 app.use('/', articleController);
+
+app.get('/', (req, res) => {
+    Article.findAll({
+        order:[
+            ['id', 'desc']
+        ]
+    }).then(articles => {
+        Categorie.findAll().then(categories => {
+            res.render("index", {articles: articles, categories: categories });
+        })
+    })
+});
+
+app.get('/:slug', (req, res) => {
+    var slug = req.params.slug;
+    Article.findOne({
+        where: {slug: slug}
+    }).then(article => {
+        if(article != undefined){
+            Categorie.findAll().then(categories => {
+                res.render("article", {article: article, categories: categories });
+            })
+        }else{
+            res.redirect('/');
+        }
+    }).catch(err => {
+        res.redirect('/');
+    })
+});
 
 app.listen(8080, () => {
     console.log('Server listening on port 8080');
