@@ -57,15 +57,27 @@ app.get('/:slug', (req, res) => {
     })
 });
 
-app.get('categories/:slug', (req, res) => {
+//TODO: não está indo para paginas dinamicamente
+app.get('/categories/:slug', (req, res) => {
     let slug = req.params.slug;
-    Categories.findOne({
+    Categorie.findOne({
         where:{
             slug: slug
+        },
+        include: [
+            {model: Article}
+        ]
+    }).then(categorie => {
+        if (categorie != undefined) {
+            Categories.findAll().then(categories => {
+                res.render('index', {articles: categorie.articles, categories: categories});
+            })
+        }else {
+            res.redirect('/');
         }
-    }).then(categories => {
-        
-    })
+    }).catch(err => {
+        res.redirect('/');
+    });
 })
 
 app.listen(8080, () => {
