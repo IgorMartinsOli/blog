@@ -69,7 +69,7 @@ app.get('/categories/:slug', (req, res) => {
         ]
     }).then(categorie => {
         if (categorie != undefined) {
-            Categories.findAll().then(categories => {
+            Categorie.findAll().then(categories => {
                 res.render('index', {articles: categorie.articles, categories: categories});
             })
         }else {
