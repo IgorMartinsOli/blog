@@ -57,7 +57,6 @@ app.get('/:slug', (req, res) => {
     })
 });
 
-//TODO: não está indo para paginas dinamicamente
 app.get('/categories/:slug', (req, res) => {
     let slug = req.params.slug;
     Categorie.findOne({
