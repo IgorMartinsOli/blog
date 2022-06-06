@@ -55,10 +55,10 @@ router.get('/admin/articles/edit/:id', (req, res) => {
     Article.findByPk(id).then(article => {
         if(article !== undefined){
             Categorie.findAll().then(categories => {
-                res.render('admin/articles/edit', {categories: categories});
+                res.render('admin/articles/edit', {categories: categories, article: article});
             })
         }else{
-            res.redirect('/admin/articles');
+            res.redirect('/');
         }
     }).catch(error => {
         res.redirect('/');
@@ -71,7 +71,7 @@ router.post('/articles/update', (req, res) => {
     let body = req.body.body;
     var category = req.body.category;
 
-    Categorie.update(
+    Article.update(
         {title: title,
         slug: slugify(title),
         body: body,
@@ -80,7 +80,20 @@ router.post('/articles/update', (req, res) => {
         {where: {id: id}},
         ).then(() =>{
             res.redirect('/admin/articles')
+        }).catch(error => {
+            console.log(error.message);
+            res.redirect('/')
         })
+})
+
+router.get('/articles/page/:num', (req, res) => {
+    let page = req.params.num;
+
+    Article.findAndCountAll({
+        limit: 4
+    }).then(articles =>{
+        res.json(articles);
+    })
 })
 
 module.exports = router;
