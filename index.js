@@ -5,9 +5,11 @@ const connect = require('./Database/database.js');
 
 const categoriesController = require('./Categories/CategoriesController.js');
 const articleController = require('./Articles/articlesController');
+const UserController = require('./User/UserController')
 
 const Article = require('./Articles/Article');
 const Categorie = require('./Categories/Categorie');
+const User = require('./user/User.js');
 
 app.set('view engine', 'ejs');
 
@@ -27,6 +29,7 @@ connect
 
 app.use('/', categoriesController);
 app.use('/', articleController);
+app.use('/', UserController)
 
 app.get('/', (req, res) => {
     Article.findAll({
